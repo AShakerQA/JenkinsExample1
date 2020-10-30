@@ -1,11 +1,13 @@
 pipeline{
     agent any
-    stages{
-        stage('clone git repo'){
-            steps{
-                //Clone repo
-                sh 'git clone https://gitlab.com/qacdevops/chaperootodo_client.git'
-            }
+    environment {
+    DB_PASSWORD=credentials('DATABASE_PASSWORD')
+    }
+    stages {
+        stage('clone git repo') {
+            steps {
+                sh '. ./clone-clarity'
+            } 
         }
         stage('install docker'){
             steps{
